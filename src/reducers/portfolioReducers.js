@@ -1,7 +1,5 @@
 // Reducers for stocks in the portfolio
 
-import { placeholder_sentiment} from "../components/Data";
-
 const defaultPortfolio = [{
         ticker: 'APPL',
         amount: 1500,
@@ -24,11 +22,14 @@ const portfolioReducers = (prevState=defaultPortfolio, action) => {
                 ...prevState, {
                     ticker: action.ticker,
                     amount: action.amount, 
-                    sentiment: placeholder_sentiment, // to be edited later
+                    sentiment: action.sentiment, // to be edited later
                 }
             ];
         case "REMOVE_STOCK":
             break;
+        case "SET_STOCKS":
+            // for demo purpose, just statically load from local redux store
+            return prevState; 
         default:
             return prevState;
     }

@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Button, Table, Text, Thead, Tr, Th, Td, Tbody, TableCaption, Link } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { InfoIcon } from '@chakra-ui/icons';
 import StockModal from './StockModal';
+import { connect } from 'react-redux';
 
-const demo_stocks = [
-    ['AAPL', 1500, [0.0294, 0.0261, 0.9444]], 
-    ['MSFT', 2000, [0.7812, 0.2034, 0.0154]], 
-    ['AMZN', 1650, [0.1203, 0.6816, 0.1981]],
-];
 
-const Portfolio = () => {
+const Portfolio = (props) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [demo_stocks, handleStocks] = useState(props.portfolio);
+    console.log(demo_stocks);
+    useEffect(() => { handleStocks(props.portfolio) })
 
     return (
         <div>
@@ -28,15 +27,15 @@ const Portfolio = () => {
                 </Tr>
             </Thead>
             <Tbody>
-                {demo_stocks.map((name) => (
+                {demo_stocks.map((item) => (
                     <Tr>
-                    <Td><b>{name[0]}</b></Td>
+                    <Td><b>{item['ticker']}</b></Td>
                     <Td>
                         <Text as={'span'} fontFamily={"Arial"} color={"gray.500"}>
-                        positive: {name[2][0]}, neutral: {name[2][1]}, negative: {name[2][2]}
+                        positive: {item['sentiment'][0]}, neutral: {item['sentiment'][1]}, negative: {item['sentiment'][2]}
                         </Text>
                     </Td>
-                    <Td isNumeric>{name[1]}</Td>
+                    <Td isNumeric>{item['amount']}</Td>
                     <Td>
                     <Button 
                         leftIcon={<InfoIcon />} colorScheme='blue' variant='solid' 
@@ -58,4 +57,13 @@ const Portfolio = () => {
         </div>
     )
 }
-export default Portfolio;
+
+const mapStateToProps = (state) => ({
+    // portfolio: state.portfolio,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    // dispatchSetStocks: () => dispatch(startSetStocks()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

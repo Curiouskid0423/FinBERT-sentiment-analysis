@@ -12,15 +12,17 @@ import {
     FormControl, 
     InputLeftAddon, 
 } from '@chakra-ui/react';
+import { connect } from 'react-redux';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import Portfolio from "./Portfolio";
 import { startAddStock } from '../actions/portfolio';
-import { connect } from 'react-redux';
+import { placeholder_sentiment} from "../components/Data";
 
 const HomePage = (props) => {
 
     const [ticker, handleTicker] = useState("");
     const [tickerAmount, handleAmount] = useState(0);
+    const [portfolio, handlePortfolio] = useState(props.portfolio);
 
     const onAddTicker = (e) => {
         e.preventDefault();
@@ -28,12 +30,15 @@ const HomePage = (props) => {
             alert("Cannot add amount of 0!");
             return;
         }
-        props.dispatchAddStock({
+        const stockObj = {
             ticker: ticker,
             amount: tickerAmount,
-        });
+            sentiment: placeholder_sentiment,
+        };
+        props.dispatchAddStock(stockObj);
         handleTicker("");
-        handleAmount(0)
+        handleAmount(0);
+        handlePortfolio([...props.portfolio, stockObj]);
     }
 
     return (
@@ -65,7 +70,6 @@ const HomePage = (props) => {
                                             placeholder={"e.g. TSLA, KO"} value={ticker}
                                             name={"headline"} onChange={(e) => {
                                                 handleTicker(e.target.value);
-                                                console.log(e.target.value);
                                             }}
                                         />
                                         <InputLeftAddon children="Amount" marginLeft={".5rem"}/>    
@@ -74,7 +78,6 @@ const HomePage = (props) => {
                                             value={tickerAmount} name={"headline"} 
                                             onChange={(e) => {
                                                 handleAmount(e.target.value);
-                                                console.log(e.target.value);
                                             }}
                                         />
                                     </InputGroup>
@@ -93,7 +96,7 @@ const HomePage = (props) => {
                 </Grid>
             </GridItem>
             <GridItem py={2}>
-                <Portfolio />
+                <Portfolio portfolio = {portfolio} />
             </GridItem>
         </Grid>
         </Box>

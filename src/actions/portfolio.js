@@ -14,3 +14,13 @@ export const startAddStock = (stockObj) => {
         console.log("Successfully dispatched ADD_STOCK");
     };
 };
+
+export const setStocks = () => ({ type: "SET_STOCKS" });
+
+export const startSetStocks = () => {
+    // Load from database in later development.
+    return (dispatch, getState) => {
+        dispatch(setStocks());
+        console.log("Successfully dispatched SET_STOCKS");
+    };
+};
