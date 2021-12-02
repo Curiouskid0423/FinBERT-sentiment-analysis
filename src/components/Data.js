@@ -33,4 +33,4 @@ export const placeholder_headlines = [
     ['Robo Advice: Why More Human Advisors Are Embracing It', [0.11, 0.02, 0.87]],
 ]
 
-
+export const placeholder_sentiment = [[0.05, 0.58, 0.36]];

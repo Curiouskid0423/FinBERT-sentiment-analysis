@@ -13,16 +13,27 @@ import {
     InputLeftAddon, 
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-
 import Portfolio from "./Portfolio";
+import { startAddStock } from '../actions/portfolio';
+import { connect } from 'react-redux';
 
-export default function HomePage() {
+const HomePage = (props) => {
 
     const [ticker, handleTicker] = useState("");
+    const [tickerAmount, handleAmount] = useState(0);
 
     const onAddTicker = (e) => {
         e.preventDefault();
-        alert(ticker);
+        if (tickerAmount == 0) {
+            alert("Cannot add amount of 0!");
+            return;
+        }
+        props.dispatchAddStock({
+            ticker: ticker,
+            amount: tickerAmount,
+        });
+        handleTicker("");
+        handleAmount(0)
     }
 
     return (
@@ -44,16 +55,25 @@ export default function HomePage() {
                         <FormControl id='headlineSearch'>
                             <Grid 
                                 templateRows='repeat(1, 1fr)'
-                                templateColumns='repeat(5, 1fr)'
+                                templateColumns='repeat(7, 1fr)'
                                 gap={4}
                             >
-                                <GridItem colSpan={4}>
+                                <GridItem colSpan={6}>
                                     <InputGroup>
                                         <InputLeftAddon children="Ticker"/>    
                                         <Input 
-                                            placeholder={"e.g. TSLA, KO"} 
+                                            placeholder={"e.g. TSLA, KO"} value={ticker}
                                             name={"headline"} onChange={(e) => {
                                                 handleTicker(e.target.value);
+                                                console.log(e.target.value);
+                                            }}
+                                        />
+                                        <InputLeftAddon children="Amount" marginLeft={".5rem"}/>    
+                                        <Input 
+                                            placeholder={"e.g. 1000"} type={"number"}
+                                            value={tickerAmount} name={"headline"} 
+                                            onChange={(e) => {
+                                                handleAmount(e.target.value);
                                                 console.log(e.target.value);
                                             }}
                                         />
@@ -79,3 +99,13 @@ export default function HomePage() {
         </Box>
   );
 }
+
+const mapStateToProps = (state) => ({
+    portfolio: state.portfolio,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    dispatchAddStock: (stockObj) => dispatch(startAddStock(stockObj)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
