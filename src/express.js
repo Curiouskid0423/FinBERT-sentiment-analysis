@@ -7,7 +7,7 @@ const port = 3001
 let word = ""
 app.get('/', (req, res) => {
     let dataToSend;
-    const python = spawn('python', ['python_codes/bert.py']);
+    const python = spawn('python', ['python_codes/bert.py', ]);
     // Read data from python script
     python.stdout.on('data', (data) => {
         console.log('Data retrieved from python file...');

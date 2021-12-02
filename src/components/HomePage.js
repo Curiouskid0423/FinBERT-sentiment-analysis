@@ -18,10 +18,11 @@ import Portfolio from "./Portfolio";
 
 export default function HomePage() {
 
-    const [headlineState, handleHeadlineState] = useState()
+    const [ticker, handleTicker] = useState("");
 
-    const onCheckHeadline = (e) => {
-        console.log(e.target.value);
+    const onAddTicker = (e) => {
+        e.preventDefault();
+        alert(ticker);
     }
 
     return (
@@ -39,7 +40,7 @@ export default function HomePage() {
             <GridItem py={2}>
                 <Grid>
                     <GridItem colSpan={5}>
-                        <form onSubmit={onCheckHeadline}>
+                        <form onSubmit={onAddTicker}>
                         <FormControl id='headlineSearch'>
                             <Grid 
                                 templateRows='repeat(1, 1fr)'
@@ -48,10 +49,13 @@ export default function HomePage() {
                             >
                                 <GridItem colSpan={4}>
                                     <InputGroup>
-                                        <InputLeftAddon children="Headline"/>    
+                                        <InputLeftAddon children="Ticker"/>    
                                         <Input 
-                                            placeholder={"e.g. BlackRock threatens buyers strike for Illinois debt"} 
-                                            name={"headline"} onChange={handleHeadlineState}
+                                            placeholder={"e.g. TSLA, KO"} 
+                                            name={"headline"} onChange={(e) => {
+                                                handleTicker(e.target.value);
+                                                console.log(e.target.value);
+                                            }}
                                         />
                                     </InputGroup>
                                 </GridItem>
@@ -59,7 +63,7 @@ export default function HomePage() {
                                     <Button 
                                         variant={"solid"} colorScheme={"blue"} 
                                         bg={"blue.300"} type={"submit"}>
-                                        Submit
+                                        Add Stock
                                     </Button>
                                 </GridItem>
                             </Grid>

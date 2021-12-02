@@ -6,7 +6,11 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { InfoIcon } from '@chakra-ui/icons';
 import StockModal from './StockModal';
 
-const demo_stocks = [['AAPL', 1500], ['MSFT', 2000], ['AMZN', 1650]]
+const demo_stocks = [
+    ['AAPL', 1500, [0.0294, 0.0261, 0.9444]], 
+    ['MSFT', 2000, [0.7812, 0.2034, 0.0154]], 
+    ['AMZN', 1650, [0.1203, 0.6816, 0.1981]],
+];
 
 const Portfolio = () => {
 
@@ -29,7 +33,7 @@ const Portfolio = () => {
                     <Td><b>{name[0]}</b></Td>
                     <Td>
                         <Text as={'span'} fontFamily={"Arial"} color={"gray.500"}>
-                        positive: 0.0294, neutral: 0.0261, negative: 0.9444
+                        positive: {name[2][0]}, neutral: {name[2][1]}, negative: {name[2][2]}
                         </Text>
                     </Td>
                     <Td isNumeric>{name[1]}</Td>
