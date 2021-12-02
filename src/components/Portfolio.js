@@ -5,8 +5,6 @@ import { Button, Table, Text, Thead, Tr, Th, Td, Tbody, TableCaption, Link } fro
 import { useDisclosure } from '@chakra-ui/hooks';
 import { InfoIcon } from '@chakra-ui/icons';
 import StockModal from './StockModal';
-import { connect } from 'react-redux';
-
 
 const Portfolio = (props) => {
 
@@ -58,12 +56,4 @@ const Portfolio = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    // portfolio: state.portfolio,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    // dispatchSetStocks: () => dispatch(startSetStocks()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
+export default Portfolio;

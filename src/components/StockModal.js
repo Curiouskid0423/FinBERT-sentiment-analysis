@@ -16,6 +16,7 @@ import StockHeadlineTable from "./StockHeadlineTable";
 const StockModal = ({isOpen, onClose}) => {
 
     const [scrollBehavior, setScrollBehavior] = React.useState('inside')
+    const demo_length = 3;
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={scrollBehavior} size={"xl"}>
@@ -24,7 +25,7 @@ const StockModal = ({isOpen, onClose}) => {
             <ModalHeader>News Headlines </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                <StockHeadlineTable />
+                <StockHeadlineTable index={Math.floor(Math.random() * demo_length)}/>
             </ModalBody>
 
             <ModalFooter>

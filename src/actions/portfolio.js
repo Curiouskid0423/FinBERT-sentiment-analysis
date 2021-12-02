@@ -5,6 +5,7 @@ export const addStock = (stockObj) => {
         type: "ADD_STOCK",
         ticker: stockObj.ticker,
         amount: stockObj.amount,
+        sentiment: stockObj.sentiment,
     };
 };
 
