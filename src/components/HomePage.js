@@ -14,7 +14,7 @@ import { CheckCircleIcon } from '@chakra-ui/icons';
 
 import Portfolio from "./Portfolio";
 
-export default function Success() {
+export default function HomePage() {
   return (
     <Box textAlign="center" py={10} px={6} m={"3rem"}>
       <CheckCircleIcon boxSize={'50px'} color={"blue.500"} />
@@ -23,7 +23,7 @@ export default function Success() {
       </Heading>
       <Grid p={9}>
         <GridItem>
-            <Text color={'gray.500'}>
+            <Text color={'gray.500'} fontSize={"1.2rem"}>
                 Your Portfolio
             </Text>
         </GridItem>
@@ -39,7 +39,7 @@ export default function Success() {
                     </InputGroup>
                 </GridItem>
                 <GridItem colSpan={1}>
-                    <Button variant={"solid"} bg={"blue.300"} color={"white"}>
+                    <Button variant={"solid"} bg={"blue.300"} color={"white"} colorScheme={"blue"}>
                         Add Stock
                     </Button>
                 </GridItem>
