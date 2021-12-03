@@ -14,10 +14,10 @@ app.get('/', (req, res) => {
         dataToSend = data.toString();
     });
     // Close event to ensure the child process is closed
-    python.on('close', (code) => {
-        console.log('Child process closed.')
-        res.send(dataToSend)
-    });
+    // python.on('close', (code) => {
+    //     console.log('Child process closed.')
+    //     res.send(dataToSend)
+    // });
 });
 
 app.listen(port, () => console.log(`Test app listening at ${port}.`));

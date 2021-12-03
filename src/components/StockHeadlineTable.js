@@ -13,7 +13,7 @@ const StockHeadlineTable = (props) => {
                 </Tr>
             </Thead>
             <Tbody>
-                {placeholder_headlines[props.index].map((line) => (
+                {placeholder_headlines[props.index || 0].map((line) => (
                     <Tr>
                     <Td>{line[0]}</Td>
                     <Td>
